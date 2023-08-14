@@ -2,23 +2,30 @@ package pl.javastart.task;
 
 public class Ticket {
 
-    private double basicPrice;
-    private double discount;
-    private double serviceFee;
-    private static int number;
+    protected double basicPrice;
+    protected double discount;
+    protected double serviceFee;
+    protected static int number = 0;
+    protected int uniqeNumber = 0;
 
-    public Ticket(double price, double discount, double serviceFee) {
-        this.basicPrice = price;
-        this.discount = discount;
-        this.serviceFee = serviceFee;
-        setNumber(Ticket.getNumber() + 1);
-    }
+    protected Event event;
 
-    public Ticket(double basicPrice, double discount) {
+    public Ticket(double basicPrice, double discount, double serviceFee, Event event) {
         this.basicPrice = basicPrice;
         this.discount = discount;
-        setNumber(Ticket.getNumber() + 1);
+        this.serviceFee = serviceFee;
+        this.event = event;
+        number += 1;
+        this.uniqeNumber = number;
 
+    }
+
+    public Ticket(double basicPrice, double discount, Event event) {
+        this.basicPrice = basicPrice;
+        this.discount = discount;
+        this.event = event;
+        number += 1;
+        this.uniqeNumber = number;
     }
 
     public static int getNumber() {
@@ -42,8 +49,8 @@ public class Ticket {
     }
 
     protected void printInfo() {
-        System.out.printf("Cena podstawowa: %.2f\n", getPrice());
-        System.out.printf("Zniżka: %d \n", (int) (getDiscount() * 100));
+        System.out.printf("Cena podstawowa: %.2f\n", basicPrice);
+        System.out.printf("Zniżka: %d \n", (int) (discount * 100));
     }
 }
 

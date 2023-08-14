@@ -28,4 +28,9 @@ public class Address {
     public String getCity() {
         return city;
     }
+
+    public void printInfo() {
+        System.out.printf("Adres:\nUlica: %s nr %d\nKod pocztowy: %s\nMiasto: %s\n", street, number,
+                postCode, city);
+    }
 }

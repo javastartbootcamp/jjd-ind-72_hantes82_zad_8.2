@@ -12,6 +12,7 @@ public class Main {
         double serviceFee = 5;
         int choice;
         Address address = new Address("Łopuszańska", 36, "04-373", "Warszawa");
+        Event event = new Event("Koncert grupy Perfect", address);
 
         do {
             System.out.println("Wybierz rodzaj biletu i wpisz odpowiadający mu numer: ");
@@ -19,18 +20,18 @@ public class Main {
             choice = scr.nextInt();
         } while (choice < 1 || choice > 3);
 
-        Ticket ticket = generateTicket(choice, basicPrice, discount, serviceFee);
-        Event event = new Event("Koncert grupy Perfect", address, ticket);
+        Ticket ticket = generateTicket(choice, basicPrice, discount, serviceFee, event);
         event.printInfo();
+        ticket.printInfo();
     }
 
-    public static Ticket generateTicket(int choice, double basicPrice, double discount, double serviceFee) {
+    public static Ticket generateTicket(int choice, double basicPrice, double discount, double serviceFee, Event event) {
         if (choice == 1) {
-            return new TicketStandard(basicPrice, discount, serviceFee);
+            return new TicketStandard(basicPrice, discount, serviceFee, event);
         } else if (choice == 2) {
-            return new TicketOnline(basicPrice, discount);
+            return new TicketOnline(basicPrice, discount, event);
         } else {
-            return new TicketGift(basicPrice, discount, serviceFee);
+            return new TicketGift(basicPrice, discount, serviceFee, event);
         }
     }
 }

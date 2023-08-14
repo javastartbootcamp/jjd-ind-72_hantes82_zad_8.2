@@ -2,38 +2,23 @@ package pl.javastart.task;
 
 public class TicketStandard extends Ticket {
     String type = "Standard";
-    private int uniqNumber;
 
-    public TicketStandard(double price, double discount, double serviceFee) {
-        super(price, discount, serviceFee);
-        uniqNumber = getNumber();
+    public TicketStandard(double price, double discount, double serviceFee, Event event) {
+        super(price, discount, serviceFee, event);
     }
 
-    public double generatePrice(double serviceFee) {
-        double result = TicketStandard.super.getPrice()
-                - TicketStandard.super.getPrice() * TicketStandard.super.getDiscount() + serviceFee;
+    public double generatePrice() {
+        double result = basicPrice - basicPrice * discount + serviceFee;
         return result;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    private void setUniqNumber(int uniqNumber) {
-        this.uniqNumber = uniqNumber;
-    }
-
-    public int getUniqNumber() {
-        return uniqNumber;
     }
 
     @Override
     protected void printInfo() {
-        System.out.printf("Typ biletu: %s\n", getType());
+        System.out.printf("Typ biletu: %s\n", type);
         super.printInfo();
         System.out.println();
-        System.out.printf("Cena ostateczna: %.2f\n", generatePrice(getServiceFee()));
-        System.out.printf("Numer biletu: %d", getUniqNumber());
+        System.out.printf("Cena ostateczna: %.2f\n", generatePrice());
+        System.out.printf("Numer biletu: %d", uniqeNumber);
 
     }
 }
